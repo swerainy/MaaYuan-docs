@@ -1,10 +1,14 @@
 import { defineConfig } from "vitepress";
 import { head } from "./config/head";
+import { heroRandomImagesPlugin } from "./plugins/heroRandomImages.mjs";
 
 export default defineConfig({
   title: "MaaYuan Docs",
   description: "MaaYuan 文档站",
   head,
+  vite: {
+    plugins: [heroRandomImagesPlugin()],
+  },
 
   rewrites: {
     "zh/:rest*": ":rest*",
@@ -21,13 +25,13 @@ export default defineConfig({
       lang: "zh-CN",
       themeConfig: {
         nav: [
-          { text: "快速开始", link: "/Started/Install" },
-          { text: "使用手册", link: "/Manual/Overview" },
-          { text: "功能介绍", link: "/Features/InstancesAndTaskList" },
-          { text: "当期活动", link: "/Activity/Current" },
-          { text: "常见问题", link: "/FAQ/" },
-          { text: "开发手册", link: "/Developer/" },
-          { text: "GitHub", link: "https://github.com/MrSnake0208/MaaYuan-docs" },
+          // { text: "快速开始", link: "/Started/Install" },
+          // { text: "使用手册", link: "/Manual/Overview" },
+          // { text: "功能介绍", link: "/Features/InstancesAndTaskList" },
+          // { text: "当期活动", link: "/Activity/Current" },
+          // { text: "常见问题", link: "/FAQ/" },
+          // { text: "开发手册", link: "/Developer/" },
+          { text: "作业站", link: "https://share.maayuan.top/" },
         ],
         sidebar: [
           {
