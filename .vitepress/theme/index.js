@@ -13,6 +13,7 @@ import HomeContributors from './components/HomeContributors.vue'
 import HomeHeroRandomImage from './components/HomeHeroRandomImage.vue'
 import NavPopoverBadge from './components/NavPopoverBadge.vue'
 import NotFound from './components/NotFound.vue'
+import SmartDownloadChannels from './components/SmartDownloadChannels.vue'
 
 /** @type {import('vitepress').Theme} */
 export default {
@@ -23,6 +24,7 @@ export default {
     ctx.app.component('HomeCommunityLinks', HomeCommunityLinks)
     ctx.app.component('HomeContributors', HomeContributors)
     ctx.app.component('NavPopoverBadge', NavPopoverBadge)
+    ctx.app.component('SmartDownloadChannels', SmartDownloadChannels)
   },
   Layout() {
     return h(Layout, null, {
