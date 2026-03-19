@@ -2,12 +2,16 @@
 import { computed, onMounted, onUnmounted, ref } from 'vue'
 
 const props = withDefaults(defineProps<{
-  label: string
-  popoverHtml: string
+  badgeText: string
+  title: string
+  description?: string
+  highlights?: string[]
   ariaLabel?: string
   screenMenu?: boolean
 }>(), {
   ariaLabel: '查看项目说明',
+  description: '',
+  highlights: () => [],
   screenMenu: false,
 })
 
@@ -19,6 +23,9 @@ const rootClass = computed(() => (
     ? ['nav-popover-badge', 'nav-popover-badge--screen']
     : ['nav-popover-badge']
 ))
+
+const hasDescription = computed(() => props.description.trim().length > 0)
+const hasHighlights = computed(() => props.highlights.length > 0)
 
 function isDesktopViewport() {
   return typeof window !== 'undefined' && window.matchMedia('(min-width: 768px)').matches
@@ -125,7 +132,7 @@ onUnmounted(() => {
       :aria-expanded="isOpen"
       @click="handleTriggerClick"
     >
-      <span class="nav-popover-badge__label">{{ props.label }}</span>
+      <span class="nav-popover-badge__label">{{ props.badgeText }}</span>
     </button>
 
     <div
@@ -133,10 +140,29 @@ onUnmounted(() => {
       class="nav-popover-badge__panel"
       role="tooltip"
     >
-      <div
-        class="nav-popover-badge__content"
-        v-html="props.popoverHtml"
-      />
+      <div class="nav-popover-badge__content">
+        <p class="nav-popover-badge__title">
+          {{ props.title }}
+        </p>
+        <p
+          v-if="hasDescription"
+          class="nav-popover-badge__description"
+        >
+          {{ props.description }}
+        </p>
+        <ul
+          v-if="hasHighlights"
+          class="nav-popover-badge__list"
+        >
+          <li
+            v-for="item in props.highlights"
+            :key="item"
+            class="nav-popover-badge__list-item"
+          >
+            {{ item }}
+          </li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -207,6 +233,29 @@ onUnmounted(() => {
   line-height: 1.7;
 }
 
+.nav-popover-badge__title,
+.nav-popover-badge__description,
+.nav-popover-badge__list {
+  margin: 0;
+}
+
+.nav-popover-badge__title {
+  font-weight: 700;
+}
+
+.nav-popover-badge__description {
+  margin-top: 8px;
+}
+
+.nav-popover-badge__list {
+  margin-top: 12px;
+  padding-left: 1.1rem;
+}
+
+.nav-popover-badge__list-item + .nav-popover-badge__list-item {
+  margin-top: 6px;
+}
+
 .nav-popover-badge__content::before {
   content: '';
   position: absolute;
@@ -218,23 +267,6 @@ onUnmounted(() => {
   border-left: 1px solid var(--vp-c-divider);
   background: color-mix(in srgb, var(--vp-c-bg) 92%, var(--vp-c-brand-soft) 8%);
   transform: translateX(-50%) rotate(45deg);
-}
-
-.nav-popover-badge__content :deep(p) {
-  margin: 0;
-}
-
-.nav-popover-badge__content :deep(p + p) {
-  margin-top: 8px;
-}
-
-.nav-popover-badge__content :deep(ul) {
-  margin: 12px 0 0;
-  padding-left: 1.1rem;
-}
-
-.nav-popover-badge__content :deep(li + li) {
-  margin-top: 6px;
 }
 
 .nav-popover-badge--screen {
