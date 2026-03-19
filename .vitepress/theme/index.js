@@ -11,6 +11,7 @@ import ArticleShare from './components/ArticleShare.vue'
 import HomeCommunityLinks from './components/HomeCommunityLinks.vue'
 import HomeContributors from './components/HomeContributors.vue'
 import HomeHeroRandomImage from './components/HomeHeroRandomImage.vue'
+import NavPopoverBadge from './components/NavPopoverBadge.vue'
 import NotFound from './components/NotFound.vue'
 
 /** @type {import('vitepress').Theme} */
@@ -21,6 +22,7 @@ export default {
     ctx.app.component('AnnouncementNavAction', AnnouncementNavAction)
     ctx.app.component('HomeCommunityLinks', HomeCommunityLinks)
     ctx.app.component('HomeContributors', HomeContributors)
+    ctx.app.component('NavPopoverBadge', NavPopoverBadge)
   },
   Layout() {
     return h(Layout, null, {

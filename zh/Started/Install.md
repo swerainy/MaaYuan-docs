@@ -23,7 +23,14 @@
 1. 导航站网盘下载：适合多数用户，但更新可能不是第一时间同步。
 2. `Mirror酱` 下载：最省事，适合国内网络环境。
 3. `GitHub` 下载：版本最及时，但通常需要科学上网。
-
+::: details 下载地址
+<div class="mirror-links">
+  <a href="https://pan.quark.cn/s/7f03fe5c1f00" target="_blank" rel="noopener">夸克网盘</a>
+  <a href="https://www.123865.com/s/iFtSjv-E7QV?pwd=yuan#" target="_blank" rel="noopener">123 云盘</a>
+  <a href="https://pan.baidu.com/s/1iONHXFD3p-UkMTPMMvEPFQ?pwd=yuan" target="_blank" rel="noopener">百度网盘</a>
+  <a href="https://wwbkq.lanzouu.com/s/maayuan" target="_blank" rel="noopener">蓝奏云(提取码yuan)</a>
+</div>
+:::
 ## 三、解压要求
 
 ### Windows

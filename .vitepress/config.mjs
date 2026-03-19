@@ -1,5 +1,6 @@
 import { defineConfig } from "vitepress";
 import { announcementNavMenuItems } from "./shared/announcementNav.mjs";
+import { navPopoverData } from "./shared/navPopover.mjs";
 import { head } from "./config/head";
 import { heroRandomImagesPlugin } from "./plugins/heroRandomImages.mjs";
 
@@ -26,29 +27,34 @@ export default defineConfig({
       lang: "zh-CN",
       themeConfig: {
         nav: [
+                    {
+            component: "NavPopoverBadge",
+            props: navPopoverData,
+          },
           {
             text: "📢 公告",
             items: announcementNavMenuItems,
           },
-{
-        text: '📖 使用手册',
-        items: [
-          { text: '快速开始', link: '/Started/Install' },
-          { text: '使用手册', link: '/Manual/Overview' },
-          { text: '功能介绍', link: '/Features/InstancesAndTaskList' },
-          { text: '常见问题', link: '/FAQ/' },
-        ],
-      },
-      { text: '🛠️ 开发手册', link: '/Developer/' },
-      {
-        text: '🔗 友情链接',
-        items: [
-          { text: 'Maa', link: 'https://maa.plus/' },
-          { text: 'Mirror酱', link: 'https://mirrorchyan.com/zh/projects?rid=MaaYuan&source=navtop' },
-          { text: 'MaaLYSK', link: 'https://maalysk.top/zh_cn/' },
-          { text: '代号鸢BWiki', link: 'https://wiki.biligame.com/yuan/%E9%A6%96%E9%A1%B5' },
-        ],
-      },
+
+          {
+            text: '📖 使用手册',
+            items: [
+              { text: '快速开始', link: '/Started/Install' },
+              { text: '使用手册', link: '/Manual/Overview' },
+              { text: '功能介绍', link: '/Features/InstancesAndTaskList' },
+              { text: '常见问题', link: '/FAQ/' },
+            ],
+          },
+          { text: '🛠️ 开发手册', link: '/Developer/' },
+          {
+            text: '🔗 友情链接',
+            items: [
+              { text: 'Maa', link: 'https://maa.plus/' },
+              { text: 'Mirror酱', link: 'https://mirrorchyan.com/zh/projects?rid=MaaYuan&source=navtop' },
+              { text: 'MaaLYSK', link: 'https://maalysk.top/zh_cn/' },
+              { text: '代号鸢BWiki', link: 'https://wiki.biligame.com/yuan/%E9%A6%96%E9%A1%B5' },
+            ],
+          },
         ],
         sidebar: [
           {

@@ -355,3 +355,57 @@
 .VPHomeHero:not(.has-image) .actions {
   justify-content: center;
 }
+
+/**
+ * Component: Mirror Links
+ * -------------------------------------------------------------------------- */
+
+.VPDoc .mirror-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+  gap: 12px;
+  margin: 16px 0 8px;
+}
+
+.VPDoc .mirror-links a {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 14px 16px;
+  min-height: 56px;
+  border: 1px solid var(--vp-c-brand-soft);
+  border-radius: 16px;
+  background: linear-gradient(135deg, var(--vp-c-brand-soft), var(--vp-c-bg-soft));
+  color: var(--vp-c-text-1);
+  text-decoration: none;
+  font-weight: 600;
+  line-height: 1.4;
+  box-shadow: 0 10px 24px rgb(79 70 229 / 10%);
+  transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease,
+    background 0.2s ease;
+}
+
+.VPDoc .mirror-links a::after {
+  content: "↗";
+  flex: none;
+  color: var(--vp-c-brand-1);
+  font-size: 0.95rem;
+}
+
+.VPDoc .mirror-links a:hover {
+  transform: translateY(-2px);
+  border-color: var(--vp-c-brand-1);
+  box-shadow: 0 16px 32px rgb(79 70 229 / 18%);
+  background: linear-gradient(135deg, var(--vp-c-brand-soft), var(--vp-c-bg-elv));
+}
+
+.VPDoc .mirror-links a:active {
+  transform: translateY(0);
+}
+
+@media (max-width: 640px) {
+  .VPDoc .mirror-links {
+    grid-template-columns: 1fr;
+  }
+}
