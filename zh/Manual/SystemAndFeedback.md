@@ -8,13 +8,14 @@
 
 ### Windows
 
-- 大多数用户下载 `MaaYuan-win-x86_64-vXXX.zip`
+- 当前仅支持 `Windows x64`：`MaaYuan-win-x86_64-vXXX.zip`
+- Windows ARM 暂不支持
 - 解压后直接运行 `MaaYuan.exe`
 
 ### macOS
 
-- Intel 处理器：`MaaYuan-macos-x86_64-vXXX.zip`
-- M1 / M2 等 Arm 处理器：`MaaYuan-macos-aarch64-vXXX.zip`
+- 当前仅支持 Apple Silicon（`M1 / M2 / M3 / M4` 等）：`MaaYuan-macos-aarch64-vXXX.tar.gz`
+- Intel Mac 暂不支持
 - 启动方式：
 
 ```sh
@@ -61,3 +62,8 @@ chmod a+x MaaYuan
 ::: warning
 反馈前尽量先看 [常见问题](../FAQ/)，很多连接、依赖、作业和分辨率问题都有现成处理办法。
 :::
+### 其他平台
+
+- Linux 暂不支持
+- Android 暂不支持
+- iOS 暂不支持

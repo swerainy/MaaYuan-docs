@@ -14,8 +14,11 @@
 | 推荐安装包 | `MaaYuan-win-x86_64-vXXX.zip` | `MaaYuan-macos-aarch64-vXXX.tar.gz` |
 
 ::: warning
-- Windows 电脑几乎都是 `x86_64`，除非你非常确定是 `ARM` 架构，否则不要误下 `aarch64` 版本。
-- Mac 电脑若是 Intel 处理器，可优先考虑 Windows 10+ 环境下使用 Windows 版 MaaYuan 与模拟器。
+- MaaYuan 当前仅支持 `Windows x64` 与 `macOS Apple Silicon（aarch64）`。
+- Windows 端只提供 `x86_64` 安装包，不支持 Windows ARM。
+- macOS 目前仅支持 Apple Silicon（`aarch64`）安装包；Intel Mac 暂不支持。
+- 若你使用的是 Intel Mac，可优先考虑 Windows 10+ 环境下使用 Windows 版 MaaYuan 与模拟器。
+- Linux、Android、iOS 以及其他未知平台当前均不支持。
 :::
 
 ## 二、下载渠道说明

@@ -15,8 +15,10 @@
 
 ### 下载哪个安装包
 
-- 完整包命名规则通常为 `MaaYuan-版本-平台-架构.zip`
-- Windows 用户大多数应下载 `win-x64`
+- 目前只支持两种安装包：`MaaYuan-win-x86_64-vXXX.zip` 与 `MaaYuan-macos-aarch64-vXXX.tar.gz`
+- Windows 仅支持 `x64`，不支持 Windows ARM
+- macOS 仅支持 Apple Silicon（`aarch64`），不支持 Intel Mac
+- Linux、Android、iOS 与其他未知平台当前均不支持
 
 ### 运行库问题
 

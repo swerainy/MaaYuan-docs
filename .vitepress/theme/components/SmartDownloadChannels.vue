@@ -14,24 +14,19 @@ interface DownloadRecommendation {
   button: string
   hint: string
   filename?: string
-  tone: 'brand' | 'warning' | 'neutral'
+  tone: 'brand' | 'warning' | 'danger' | 'neutral'
 }
 
 type MirrorChyanOs = 'windows' | 'macos' | 'linux'
 type MirrorChyanArch = 'x64' | 'arm64'
+type UserAgentHighEntropyHint = 'architecture'
 
 const releaseFiles = {
   windows: {
     x64: 'MaaYuan-win-x86_64-v2.1.1-beta.1.zip',
-    arm64: 'MaaYuan-win-aarch64-v2.1.1-beta.1.zip',
   },
   macos: {
-    x64: 'MaaYuan-macos-x86_64-v2.1.1-beta.1.tar.gz',
     arm64: 'MaaYuan-macos-aarch64-v2.1.1-beta.1.tar.gz',
-  },
-  linux: {
-    x64: 'MaaYuan-linux-x86_64-v2.1.1-beta.1.tar.gz',
-    arm64: 'MaaYuan-linux-aarch64-v2.1.1-beta.1.tar.gz',
   },
 } as const
 
@@ -84,7 +79,7 @@ function normalizeArch(raw: string) {
   return 'unknown' as const
 }
 
-function detectEnvironment() {
+async function detectEnvironment() {
   if (typeof navigator === 'undefined')
     return
 
@@ -92,14 +87,37 @@ function detectEnvironment() {
     userAgentData?: {
       platform?: string
       architecture?: string
+      getHighEntropyValues?: (hints: UserAgentHighEntropyHint[]) => Promise<{
+        architecture?: string
+      }>
     }
   }
 
   const userAgent = nav.userAgent ?? ''
   const platformHint = [nav.userAgentData?.platform, nav.platform, userAgent].filter(Boolean).join(' ')
-  const architectureHint = [nav.userAgentData?.architecture, userAgent, nav.platform].filter(Boolean).join(' ')
 
   detectedPlatform.value = normalizePlatform(platformHint)
+
+  if (detectedPlatform.value === 'macos') {
+    const macArchitectureHints = [nav.userAgentData?.architecture].filter(Boolean) as string[]
+
+    if (nav.userAgentData?.getHighEntropyValues) {
+      try {
+        const hints = await nav.userAgentData.getHighEntropyValues(['architecture'])
+        if (hints.architecture)
+          macArchitectureHints.unshift(hints.architecture)
+      }
+      catch {
+        // Ignore and fall back to the only supported macOS architecture.
+      }
+    }
+
+    const detectedMacArch = normalizeArch(macArchitectureHints.join(' '))
+    detectedArch.value = detectedMacArch === 'unknown' ? 'arm64' : detectedMacArch
+    return
+  }
+
+  const architectureHint = [nav.userAgentData?.architecture, userAgent, nav.platform].filter(Boolean).join(' ')
   detectedArch.value = normalizeArch(architectureHint)
 }
 
@@ -123,77 +141,66 @@ const recommendation = computed<DownloadRecommendation>(() => {
 
   if (detectedPlatform.value === 'windows' && (detectedArch.value === 'arm64' || detectedArch.value === 'arm')) {
     return {
-      button: '推荐下载 Windows ARM 版',
-      hint: '进入任一网盘后，优先选择以下完整安装包：',
-      filename: releaseFiles.windows.arm64,
-      tone: 'brand',
+      button: 'Windows ARM 暂不支持',
+      hint: 'MaaYuan 当前仅支持 Windows x64；如果你的设备是 Windows ARM，请暂时不要下载 ARM 安装包。',
+      tone: 'danger',
     }
   }
 
   if (detectedPlatform.value === 'windows') {
     return {
-      button: '查看全部下载渠道',
-      hint: 'Windows 电脑多数应选择 x86_64；只有你非常确定是 ARM 设备时再选 aarch64。',
+      button: '推荐下载 Windows x64 版',
+      hint: 'MaaYuan 当前仅支持 Windows x64；若未识别出架构，请优先下载 x86_64 完整包。',
+      filename: releaseFiles.windows.x64,
       tone: 'warning',
-    }
-  }
-
-  if (detectedPlatform.value === 'macos' && detectedArch.value === 'arm64') {
-    return {
-      button: '推荐下载 macOS Apple Silicon 版',
-      hint: '进入任一网盘后，优先选择以下完整安装包：',
-      filename: releaseFiles.macos.arm64,
-      tone: 'brand',
     }
   }
 
   if (detectedPlatform.value === 'macos' && detectedArch.value === 'x64') {
     return {
-      button: '推荐下载 macOS Intel 版',
-      hint: '进入任一网盘后，优先选择以下完整安装包：',
-      filename: releaseFiles.macos.x64,
-      tone: 'brand',
+      button: 'macOS Intel 暂不支持',
+      hint: 'MaaYuan 目前仅提供 macOS Apple Silicon（aarch64）安装包；若你使用的是 Intel Mac，建议改用 Windows 环境。',
+      tone: 'danger',
     }
   }
 
   if (detectedPlatform.value === 'macos') {
     return {
-      button: '查看全部下载渠道',
-      hint: 'Apple Silicon 机型选 aarch64，Intel 机型选 x86_64。',
-      tone: 'warning',
-    }
-  }
-
-  if (detectedPlatform.value === 'linux' && detectedArch.value === 'x64') {
-    return {
-      button: '推荐下载 Linux x64 版',
-      hint: '进入任一网盘后，优先选择以下完整安装包：',
-      filename: releaseFiles.linux.x64,
-      tone: 'brand',
-    }
-  }
-
-  if (detectedPlatform.value === 'linux' && (detectedArch.value === 'arm64' || detectedArch.value === 'arm')) {
-    return {
-      button: '推荐下载 Linux ARM64 版',
-      hint: '进入任一网盘后，优先选择以下完整安装包：',
-      filename: releaseFiles.linux.arm64,
+      button: '推荐下载 macOS Apple Silicon 版',
+      hint: '进入任一网盘后，优先选择以下完整安装包；若你的 Mac 是 Intel 处理器，则当前暂不支持。',
+      filename: releaseFiles.macos.arm64,
       tone: 'brand',
     }
   }
 
   if (detectedPlatform.value === 'linux') {
     return {
-      button: '查看全部下载渠道',
-      hint: 'Linux 用户请按架构选择 x86_64 或 aarch64 对应压缩包。',
-      tone: 'warning',
+      button: 'Linux 暂不支持',
+      hint: 'MaaYuan 当前不提供 Linux 版本，请改用 Windows x64 或 macOS Apple Silicon 设备。',
+      tone: 'danger',
+    }
+  }
+
+  if (detectedPlatform.value === 'android') {
+    return {
+      button: 'Android 暂不支持',
+      hint: 'MaaYuan 当前不提供 Android 版本，请改用 Windows x64 或 macOS Apple Silicon 设备。',
+      tone: 'danger',
+    }
+  }
+
+  if (detectedPlatform.value === 'ios') {
+    return {
+      button: 'iOS 暂不支持',
+      hint: 'MaaYuan 当前不提供 iOS 版本，请改用 Windows x64 或 macOS Apple Silicon 设备。',
+      tone: 'danger',
     }
   }
 
   return {
-    button: '查看全部下载渠道',
-    hint: '当前系统暂不支持自动推荐，请展开下方渠道并手动选择对应安装包。',
-    tone: 'neutral',
+    button: '当前系统暂不支持',
+    hint: 'MaaYuan 当前仅支持 Windows x64 与 macOS Apple Silicon（aarch64）。',
+    tone: 'danger',
   }
 })
 
@@ -226,25 +233,14 @@ const mirrorChyanUrl = computed(() => {
     source: 'maayuan-docs-download',
   })
 
-  const osMap: Partial<Record<Platform, MirrorChyanOs>> = {
-    windows: 'windows',
-    macos: 'macos',
-    linux: 'linux',
+  if (detectedPlatform.value === 'windows' && detectedArch.value !== 'arm64' && detectedArch.value !== 'arm') {
+    params.set('os', 'windows')
+    params.set('arch', 'x64')
   }
-
-  const archMap: Partial<Record<Arch, MirrorChyanArch>> = {
-    x64: 'x64',
-    arm64: 'arm64',
-    arm: 'arm64',
+  else if (detectedPlatform.value === 'macos' && detectedArch.value !== 'x64') {
+    params.set('os', 'macos')
+    params.set('arch', 'arm64')
   }
-
-  const os = osMap[detectedPlatform.value]
-  const arch = archMap[detectedArch.value]
-
-  if (os)
-    params.set('os', os)
-  if (arch)
-    params.set('arch', arch)
 
   return `https://mirrorchyan.com/zh/projects?${params.toString()}`
 })
@@ -277,9 +273,11 @@ function syncExpandedState() {
 }
 
 onMounted(() => {
-  detectEnvironment()
-  isClientReady.value = true
-  syncExpandedState()
+  void (async () => {
+    await detectEnvironment()
+    isClientReady.value = true
+    syncExpandedState()
+  })()
 })
 </script>
 
@@ -375,6 +373,12 @@ onMounted(() => {
   background: linear-gradient(135deg, var(--vp-c-warning-3), var(--vp-c-warning-2));
   color: var(--vp-c-black);
   box-shadow: 0 14px 28px rgb(234 179 8 / 18%);
+}
+
+.smart-download__primary--danger {
+  background: linear-gradient(135deg, var(--vp-c-danger-3), var(--vp-c-danger-2));
+  color: var(--vp-c-white);
+  box-shadow: 0 14px 28px rgb(220 38 38 / 22%);
 }
 
 .smart-download__primary--neutral {
