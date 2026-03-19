@@ -7,9 +7,9 @@
 > 一句话教学：下载解压`MaaYuan`本体 +下载安装两个`运行环境`
 下载&安装&更新均配置了图文或视频版，请自行前往[B站](https://space.bilibili.com/3690998968355771)或[小红书](https://www.xiaohongshu.com/user/profile/685e3301000000001b0229ed)查阅
 
-## 一、先确认适用系统
+## 一、确认适用系统
 
-| 系统 | Windows | macOS |
+| **系统** | **Windows** | **macOS**|
 | --- | --- | --- |
 | 系统版本 | `Windows 10` 及以上 | `macOS 15.0` 及以上 |
 | 运行环境 | 需要 | 需要 |
@@ -32,7 +32,7 @@
 
 <SmartDownloadChannels />
 
-## 三、解压要求
+## 三、解压安装
 
 ### Windows
 
@@ -46,43 +46,18 @@
 - 尽量避免路径含中文。
 - 下载目录可以作为临时解压位置，但正式使用仍建议放在独立目录。
 
-## 四、安装依赖库
+## 四、安装运行环境（依赖库）
 
-### Windows
-
-1. 打开 MaaYuan 文件夹。
-2. 右键 `DependencySetup_依赖库安装_win.bat`。
-3. 选择“以管理员身份运行”。
-
-### macOS
-
-1. 打开 MaaYuan 文件夹。
-2. 在文件夹位置打开终端。
-3. 执行以下命令：
-
-```sh
-sh DependencySetup_依赖库安装_mac.sh
-```
-
-## 五、如果依赖安装失败
-
-### Windows 手动补装
-
-1. 安装 `vc_redist.x64`。
-2. 安装 `.NET 10` 桌面运行时（`Windows x64`）。
-3. 安装完成后如提示重启，请务必重启电脑。
-
-### macOS 手动补装
-
-1. 无需安装 `VCRedist`。
-2. 安装 `.NET 10` 运行时（`macOS Arm64` 或对应架构版本）。
-3. 安装完成后如提示重启，请务必重启。
+| **系统** | **Windows** | **macOS** |
+| --------------------- | -------------------- | -------------------- |
+| 依赖库主要安装步骤 | 打开`MaaYuan`文件夹右键点击`DependencySetup_依赖库安装_win.bat`选择以管理员身份运行 | 打开`MaaYuan`文件夹点击“新建位于文件夹位置的终端窗口”或点击`启动台-其他-终端`输入指令 `sh DependencySetup_依赖库安装_mac.sh` |
+| 若依赖库安装失败 | 下载**VCRedist**：点击 [**vc_redist.x64**](https://wwbkq.lanzouu.com/b0syb4jmj) 下载并安装完成；下载**NET10**：点击[**.NET 官方下载页面**](https://dotnet.microsoft.com/zh-cn/download/dotnet/10.0)选择 .NET **桌面运行时**-Windows **x64**进行下载并安装完成。 | 无需下载**VCRedist**；下载**NET10**：点击[**.NET 官方下载页面**](https://dotnet.microsoft.com/zh-cn/download/dotnet/10.0)选择 .NET**运行时**-macOS **Arm64**进行下载并安装完成。 |
 
 ::: details 版本变化提醒
 从 `v2.0.0` 起，MaaYuan 需要 `.NET 10` 及以上运行库，原来的 `.NET 8` 已不再满足要求。
 :::
 
-## 六、下一步
+## 五、下一步
 
 安装完成后，继续阅读：
 
