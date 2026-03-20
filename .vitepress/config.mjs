@@ -88,37 +88,9 @@ export default defineConfig({
             items: [
               { text: "当前活动", link: "/Activity/Current" },
               { text: "常驻活动", link: "/Activity/Permanent" },
-              {
-                text: "2025",
-                collapsed: true,
-                items: [
-                  { text: "天下隐光 V1", link: "/Activity/Archive/2025/TianxiaYinguangV1" },
-                  { text: "望祈丰年", link: "/Activity/Archive/2025/Wangqifengnian" },
-                  { text: "朝歌之战", link: "/Activity/Archive/2025/Chaogezhizhan" },
-                  { text: "邺城之战 V2", link: "/Activity/Archive/2025/YechengzhizhanV2" },
-                  { text: "月海夜航船扫荡", link: "/Activity/Archive/2025/YuehaiYeHangChuanSaodang" },
-                  { text: "爱乐之村 无痛跑圈试用版", link: "/Activity/Archive/2025/Aileyuzhicun" },
-                  { text: "云梦巫乡挖煤 V4", link: "/Activity/Archive/2025/YunmengWuxiangWaMeiV4" },
-                  { text: "云梦巫乡挖煤自定义版 V2", link: "/Activity/Archive/2025/YunmengWuxiangCustomV2" },
-                  { text: "东海海水浴场", link: "/Activity/Archive/2025/DonghaiHaishuiYuchang" },
-                  { text: "温泉山庄小管家", link: "/Activity/Archive/2025/WenquanShanzhuangXiaoguanjia" },
-                  { text: "披荆斩棘的实习考核", link: "/Activity/Archive/2025/PijingzhanjiDeShixikaohe" },
-                  { text: "迎春开锦书金囊", link: "/Activity/Archive/2025/YingchunkaiJinshuJinnang" },
-                  { text: "江东万里船 V3", link: "/Activity/Archive/2025/JiangdongWanlichuanV3" },
-                  { text: "魂生一串", link: "/Activity/Archive/2025/HunshengYichuan" },
-                ],
-              },
-              {
-                text: "2026",
-                collapsed: true,
-                items: [
-                  { text: "躬耕南阳 V1", link: "/Activity/Archive/2026/GonggengNanyangV1" },
-                  { text: "菌子种植助手", link: "/Activity/Archive/2026/JunziZhongzhiZhushou" },
-                  { text: "花灯绘", link: "/Activity/Archive/2026/Huadenghui" },
-                  { text: "咪教模拟器助手", link: "/Activity/Archive/2026/MijiaoMoniqiZhushou" },
-                  { text: "咪教模拟器", link: "/Activity/Archive/2026/MijiaoMoniqi" },
-                ],
-              },
+              { text: "2026年活动存档", link: "/Activity/2026EventArchiv"},
+              { text: "2025年活动存档", link: "/Activity/2025EventArchive" },
+
             ],
           },
           {
