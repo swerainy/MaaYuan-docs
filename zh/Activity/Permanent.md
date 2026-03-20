@@ -1,4 +1,4 @@
-# 常驻活动<Badge type="warning" text="活动" />
+# 常驻活动<Badge type="warning" text="常驻活动" />
 
 ::: tip
 本文仅展示常驻活动信息。

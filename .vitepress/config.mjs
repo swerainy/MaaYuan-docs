@@ -87,14 +87,7 @@ export default defineConfig({
             text: "🎉 活动指南",
             items: [
               { text: "当前活动", link: "/Activity/Current" },
-              {
-                text: "未注明年份",
-                collapsed: true,
-                items: [
-                  { text: "初见日", link: "/Activity/Archive/Undated/Chujianri" },
-                  { text: "楼主查岗", link: "/Activity/Archive/Undated/Louzhuchagang" },
-                ],
-              },
+              { text: "常驻活动", link: "/Activity/Permanent" },
               {
                 text: "2025",
                 collapsed: true,
