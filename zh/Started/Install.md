@@ -1,4 +1,4 @@
-# 下载与安装<Badge type="tip" text="简单" />
+# 下载与安装<Badge type="tip" text="新手" />
 
 ::: tip
 本文用于第一次安装`MaaYuan`，包含版本选择、解压规范与运行环境配置。
