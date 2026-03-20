@@ -1,4 +1,4 @@
-# 活动任务<Badge type="warning" text="最新" />
+# 当期活动<Badge type="warning" text="新活" />
 
 ::: tip
 本文仅展示当前活动的任务介绍、反馈的问题和解决方案。
