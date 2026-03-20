@@ -1,12 +1,6 @@
 <script setup lang="ts">
 const communityLinks = [
   {
-    icon: '💬',
-    text: '反馈与帮助',
-    href: '/Manual/SystemAndFeedback',
-    external: false,
-  },
-  {
     icon: '📤',
     text: '作业站',
     href: 'https://share.maayuan.top/',
