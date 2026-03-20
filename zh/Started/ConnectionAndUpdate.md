@@ -1,4 +1,4 @@
-# 连接与更新<Badge type="warning" text="普通" />
+# 连接与更新<Badge type="warning" text="新手" />
 
 ::: tip
 本文说明首次连接模拟器、自动/手动连接方法，以及更新渠道与版本选择。
