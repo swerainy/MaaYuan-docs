@@ -42,6 +42,7 @@ export default defineConfig({
               { text: '快速开始', link: '/Started/Install' },
               { text: '使用手册', link: '/Manual/Overview' },
               { text: '功能介绍', link: '/Features/InstancesAndTaskList' },
+              { text: '任务介绍', link: '/Activity/Current' },
               { text: '常见问题', link: '/FAQ/' },
             ],
           },
